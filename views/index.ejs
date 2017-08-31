@@ -1,0 +1,29 @@
+<% include partials/header %>
+
+    <main class = "container">
+        <section class = "row">
+            <header class = "jumbotron">
+                <h1> Thư viện ảnh EDW </h1>
+                <h2>Feel free to upload những bức ảnh của bạn về dự án EDW và chia sẻ những câu chuyện, 
+                những kỷ niệm của bạn ở dự án</h2>
+                <p class = "p--jumbotron"><a href = "/camp/new" class = "btn btn-primary btn-lg btn--jumbotron">Upload ảnh ở đây nè</a></p>
+            </header>      
+        </section>
+        
+        <section class = "row">
+            <% camp.forEach(function(item){ %>
+                <figure class = "col-xs-6 col-md-4 col-lg-3 thumbnail" >
+                    <img src = "<%= item.imageUrl %>">
+                    <figcaption> 
+                        <%= item.name %>
+                        <p>
+                            <em>Created by <%= item.author.username %></em>
+                        </p>
+                        <a href = "/camp/<%= item._id %>" class = "btn btn-info"> More Info </a>
+                    </figcaption>
+                </figure>
+            <% }) %>
+        </section>
+    </main>
+    
+<% include partials/footer %>

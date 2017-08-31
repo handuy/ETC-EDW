@@ -1,0 +1,64 @@
+<% include partials/header %>
+
+<div class = "container">
+    <figure class = "thumbnail">
+        <img class = "img-responsive" src = "<%= selectedCamp.imageUrl %>">
+        <figcaption>
+            <h2><%= selectedCamp.name %></h2>
+            <p> Created by <em><%= selectedCamp.author.username %></em> </p>
+            <h3><%= selectedCamp.description %></h3>
+            <% if (currentUser && selectedCamp.author.id.equals(currentUser._id)) { %>
+            <div class = "text-right">
+                <div>
+                    <a class = "btn btn-sm btn-warning" href = "/camp/<%= selectedCamp._id %>/edit">Edit post</a>
+                
+                    <form style = "display: inline" action = "/camp/<%= selectedCamp._id %>?_method=DELETE" method = "POST">
+                        <button class = "btn btn-sm btn-danger">Delete post</button>
+                    </form>                 
+                </div>
+            </div>
+            <% } %>            
+        </figcaption>
+    </figure>
+    
+    <div class = "well">
+        <div class = "text-right">
+            <a href = "/camp/<%= selectedCamp._id %>/comment/new" class = "btn btn-success">
+                Add new comment
+            </a>
+        </div>
+        
+        <section id = "comment">
+            <% selectedCamp.comments.forEach(function(comment){ %>
+                <div class = "row">
+                    <div class = "col-md-8">
+                        <p><strong><%= comment.author.username %></strong></p>
+                        <p><%= comment.text %></p>
+                    </div>
+                </div>
+                    
+                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                    <div class = "row">
+                        <div style = "margin-right: 5px" class = "col-sm-1">
+                            <a class = "btn btn-xs btn-warning" 
+                            href = "/camp/<%= selectedCamp._id %>/comment/<%= comment._id %>/edit" 
+                            class = "">Edit comment</a>
+                        </div>
+                        
+                        <div class = "col-sm-1">
+                            <form style = "display: inline" action = "/camp/<%= selectedCamp._id%>/comment/<%= comment._id %>?_method=DELETE" 
+                            method = "POST">
+                                <button class = "btn btn-xs btn-danger">Delete comment</button>
+                            </form> 
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <br/>
+                <% } %>
+            <% }) %>
+        </section>
+    </div>
+</div>
+
+<% include partials/footer %>

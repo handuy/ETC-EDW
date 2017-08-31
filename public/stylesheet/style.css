@@ -1,0 +1,33 @@
+.thumbnail > img {
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0px;
+}
+
+.p--jumbotron {
+    margin: 25px 0px;
+}
+
+.btn--jumbotron {
+    animation: bounce 1s infinite;;
+}
+
+@keyframes bounce {
+        0% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+  
+  30%{
+    transform: scale(1,0.8) translate(0px, 10px); 
+  }
+
+  75%{
+    transform: scale(1,1.1) translate(0px, -25px); 
+  }
+  
+ 100% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+}
