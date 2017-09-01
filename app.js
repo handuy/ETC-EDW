@@ -36,7 +36,9 @@ passport.deserializeUser(User.deserializeUser());
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-mongoose.connect("mongodb://localhost/yelp");
+//mongoose.connect("mongodb://localhost/yelp");
+mongoose.connect("mongodb://edw:edw@ds161913.mlab.com:61913/edw");
+//mongodb://edw:edw@ds161913.mlab.com:61913/edw
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
