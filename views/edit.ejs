@@ -1,24 +1,32 @@
-<% include partials/header %>
+<% include partials/header1 %>
 
 <div class = "container">
     <div class = "row">
         <h1 style = "text-align: center;"> Edit: <%= foundCamp.name %> </h1>
         <div style = "width: 40%; margin: 40px auto;">
-            <form action = "/camp/<%= foundCamp._id %>?_method=PUT" method = "POST">
+            <form action = "/camp/<%= foundCamp._id %>?_method=PUT"
+            enctype = "multipart/form-data" method = "POST">
                 <div class = "form-group">
-                    <input class = "form-control" type = "text" name = "camp[name]" 
+                    <input class = "form-control" type = "text" name = "name" 
                     value = "<%= foundCamp.name %>">
                 </div>
                 
                 <div class = "form-group">
-                    <input class = "form-control" type = "text" name = "camp[image]" 
-                    value = "<%= foundCamp.imageUrl %>">
-                </div>
+                    <textarea class = "form-control" type = "text" name = "description" 
+                    value = "<%= foundCamp.description %>"></textarea>
+                </div>                
                 
                 <div class = "form-group">
-                    <textarea class = "form-control" type = "text" name = "camp[description]" 
-                    value = "<%= foundCamp.description %>"></textarea>
+                    <input type = "radio" name = "image" id = "currentImage" 
+                    value = "<%= foundCamp.imageUrl %>" checked onClick = "removeInput()">
+                    <label for = "currentImage">Use current image</label>
+                    
+                    <input type = "radio" name = "image" id = "newImage" onClick = "newInput()"
+                    value = "updated">
+                    <label for = "newImage">Upload new image</label>                    
                 </div>
+                
+                <div class = "form-group" id = "newInput"></div>
                 
                 <div class = "form-group">
                     <button class = "btn btn-lg btn-info btn-block"> Edit </button>

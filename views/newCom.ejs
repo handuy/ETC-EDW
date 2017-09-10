@@ -4,7 +4,8 @@
     <div class = "row">
         <h1 style = "text-align: center;"> Add new comment to camp <%= foundCamp.name %> </h1>
         <div style = "width: 30%; margin: 40px auto;">
-            <form action = "/camp/<%= foundCamp._id %>/comment" method = "POST">
+            <form action = "/camp/<%= foundCamp._id %>/comment" enctype="multipart/form-data" 
+            method = "POST">
                 <div class = "form-group">
                     <input class = "form-control" type = "text" name = "comment[text]" placeholder = "Comment">
                 </div>

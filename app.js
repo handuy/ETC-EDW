@@ -8,6 +8,7 @@ var localStrategy = require("passport-local");
 var expressSession = require("express-session");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
+var multer = require('multer');
 
 // Get the camp, comment and authentication routes
 var campRoute = require("./routes/camp");
@@ -34,7 +35,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // seed data, use ejs+css, connect mongodb
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 mongoose.connect(process.env.DATABASEURL);
 //mongoose.connect("mongodb://edw:edw@ds161913.mlab.com:61913/edw");

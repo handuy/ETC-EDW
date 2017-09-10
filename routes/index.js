@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 var passport = require("passport");
+var multer  = require('multer');
+var upload = multer();
 
 // Home Page
 router.get("/", function(req,res){
@@ -14,7 +16,8 @@ router.get("/register", function(req,res){
 });
 
 // handle sign up request
-router.post("/register", function(req,res){
+router.post("/register", upload.array(), function(req,res){
+    //console.log(req.body);
    User.register(new User({username: req.body.username}), req.body.password, function(err, newUser){
       if (err) {
           req.flash("error", err.message);
@@ -34,7 +37,7 @@ router.get("/login", function(req,res){
 });
 
 // handle login request
-router.post("/login", passport.authenticate("local", {
+router.post("/login", upload.array(), passport.authenticate("local", {
     successRedirect: "/camp",
     failureRedirect: "/login"
 }), function(req,res){});
