@@ -10,9 +10,9 @@
             </header>      
         </section>
         
-        <section class = "row">
+        <section class = "row flex">
             <% camp.forEach(function(item){ %>
-                <figure style = "width: 23%;" class = "col-xs-6 col-md-4 col-lg-3 thumbnail" >
+                <figure class = "col-xs-6 col-md-4 col-lg-3 thumbnail" >
                     <a href = "/camp/<%= item._id %>">
                         <img src = "<%= item.imageUrl %>">
                     </a>
