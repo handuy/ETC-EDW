@@ -21,3 +21,11 @@ function modalBox() {
 function removeBox() {
     $("#myModal").hide();
 }
+
+function commentModal() {
+    $("#commentModal").show();
+}
+
+function removeCommentBox() {
+    $("#commentModal").hide();
+}

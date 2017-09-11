@@ -58,10 +58,20 @@
                         </div>
                         
                         <div class = "col-sm-1">
+                            <button class = "btn btn-xs btn-danger" onClick = "commentModal()">Delete comment</button>
+                        </div>
+                    </div>
+                    
+                    <div id="commentModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close" onClick = "removeCommentBox()">&times;</span>
+                            <p>Bạn chắc chắn muốn xóa comment này ?</p>
                             <form style = "display: inline" action = "/camp/<%= selectedCamp._id%>/comment/<%= comment._id %>?_method=DELETE" 
                             method = "POST">
-                                <button class = "btn btn-xs btn-danger">Delete comment</button>
-                            </form> 
+                                <button class = "btn btn-sm btn-danger">Yes</button>
+                            </form>
+                            <a class = "btn btn-sm btn-warning" onClick = "removeCommentBox()">No</a>
                         </div>
                     </div>
                 <% } %>
