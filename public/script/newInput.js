@@ -14,3 +14,10 @@ function removeInput() {
     }
 }
 
+function modalBox() {
+    $("#myModal").show();
+}
+
+function removeBox() {
+    $("#myModal").hide();
+}

@@ -1,4 +1,18 @@
-<% include partials/header %>
+<% include partials/header1 %>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onClick = "removeBox()">&times;</span>
+    <p>Bạn chắc chắn muốn xóa post này ?</p>
+    <form style = "display: inline" action = "/camp/<%= selectedCamp._id %>?_method=DELETE" method = "POST">
+        <button class = "btn btn-sm btn-danger">Yes</button>
+    </form>
+    <a class = "btn btn-sm btn-warning" onClick = "removeBox()">No</a>
+  </div>
+
+</div>
 
 <div class = "container">
     <figure class = "thumbnail">
@@ -11,10 +25,9 @@
             <div class = "text-right">
                 <div>
                     <a class = "btn btn-sm btn-warning" href = "/camp/<%= selectedCamp._id %>/edit">Edit post</a>
-                
-                    <form style = "display: inline" action = "/camp/<%= selectedCamp._id %>?_method=DELETE" method = "POST">
-                        <button class = "btn btn-sm btn-danger">Delete post</button>
-                    </form>                 
+                    <button class = "btn btn-sm btn-danger" id = "deleteBox" onClick = "modalBox()">
+                        Delete post
+                    </button>
                 </div>
             </div>
             <% } %>            
