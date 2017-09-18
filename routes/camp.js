@@ -15,9 +15,6 @@ var storage =   multer.diskStorage({
 });
 var upload = multer({storage: storage}).single("image");
 var edit = multer({storage: storage}).single("updatedImage");
-//var upload = multer({ dest: './public/images/uploads' });
-//var cpUpload = upload.fields([ { name: 'image', maxCount: 1 } ]);
-
 
 // Show all the camps
 router.get("/camp", function(req,res){
@@ -37,22 +34,25 @@ router.post("/camp", middleObj.isLoggedIn, function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         } else {
-            Cloudinary.v2.uploader.upload(req.file.path, 
+            Cloudinary.v2.uploader.upload(req.file.path,
             {api_key: "698891531897437", api_secret: "F75b3U2uSX2cjlF6xgWi0o_RJBM", 
             cloud_name: "ddgsfbrgm"}, function(err, result) { 
                 if(err) {
                     console.log("Error uploading");
                     console.log(err);
                 } else {
-                    var newName = req.body.name;
-                    var newImageUrl = result.secure_url;;
-                    var newDesc = req.body.description;
+                    var name = req.body.name;
+                    var thumbnailImage = Cloudinary.url(result.public_id + "." + result.format, {
+                    cloud_name: "ddgsfbrgm", angle: "exif", quality: "auto:low", height: 218, 
+                    crop: "scale"});
+                    var fullImage = Cloudinary.url(result.public_id + "." + result.format, {
+                    cloud_name: "ddgsfbrgm", angle: "exif"});
+                    var description = req.body.description;
                     var author = {
                         id: req.user._id,
                         username: req.user.username
                     };
-                    var newCamp = {name: newName, imageUrl: newImageUrl, description: newDesc, 
-                    author: author};
+                    var newCamp = {name, thumbnailImage, fullImage, description, author};
                     Camp.create(newCamp, function(err, newData){
                         if (err){
                             req.flash("error", err.message);
@@ -99,7 +99,6 @@ router.get("/camp/:id/edit", middleObj.checkCampOwnership, function(req,res){
 
 // handle update camp request
 router.put("/camp/:id", middleObj.checkCampOwnership, function(req,res){
-    //console.log(req.body);
     edit(req,res,function(err) {
         if (err) {
             res.end(err);
@@ -113,27 +112,30 @@ router.put("/camp/:id", middleObj.checkCampOwnership, function(req,res){
                     if (err) {
                         return res.end();
                     } else {
-                        var imageUrl = result.secure_url;
-                        var newlyUpdatedCamp = {name, imageUrl, description};
+                        var thumbnailImage = Cloudinary.url(result.public_id + "." + result.format, {
+                            cloud_name: "ddgsfbrgm", angle: "exif", quality: "auto:low", height: 218, 
+                            crop: "scale"});
+                        var fullImage = Cloudinary.url(result.public_id + "." + result.format, {
+                            cloud_name: "ddgsfbrgm", angle: "exif"});
+                        var newlyUpdatedCamp = {name, thumbnailImage, fullImage, description};
                         Camp.findByIdAndUpdate(req.params.id, newlyUpdatedCamp, function(err,updatedCamp){
                             if (err) {
                                 req.flash("error", err.message);
                                 res.redirect("/");
                             } else {
-                                res.redirect("/camp");
+                                res.redirect("/camp/" + updatedCamp._id);
                             }
                         }); 
                     }
                 });
             } else {
-                var imageUrl = req.body.image;
-                var updatedCamp = {name, imageUrl, description};
+                var updatedCamp = {name, description};
                 Camp.findByIdAndUpdate(req.params.id, updatedCamp, function(err,updatedCamp){
                     if (err) {
                         req.flash("error", err.message);
                         res.redirect("/");
                     } else {
-                        res.redirect("/camp");
+                        res.redirect("/camp/" + updatedCamp._id);
                     }
                 }); 
             }

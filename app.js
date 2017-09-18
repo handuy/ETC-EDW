@@ -1,14 +1,12 @@
 // Get packages
 var express = require("express");
 var app = express();
-var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var expressSession = require("express-session");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
-var multer = require('multer');
 
 // Get the camp, comment and authentication routes
 var campRoute = require("./routes/camp");
