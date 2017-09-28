@@ -14,18 +14,14 @@ function removeInput() {
     }
 }
 
-function modalBox() {
-    $("#myModal").show();
-}
-
-function removeBox() {
-    $("#myModal").hide();
-}
-
 function commentModal() {
     $("#commentModal").show();
 }
 
 function removeCommentBox() {
     $("#commentModal").hide();
+}
+
+function hideLoginModal() {
+    $("#loginForm").modal('hide')
 }

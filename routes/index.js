@@ -11,9 +11,9 @@ router.get("/", function(req,res){
 });
 
 // show register form
-router.get("/register", function(req,res){
+/*router.get("/register", function(req,res){
     res.render("register");
-});
+});*/
 
 // handle sign up request
 router.post("/register", upload.array(), function(req,res){
@@ -32,9 +32,9 @@ router.post("/register", upload.array(), function(req,res){
 });
 
 //show login form
-router.get("/login", function(req,res){
+/*router.get("/login", function(req,res){
    res.render("login"); 
-});
+});*/
 
 // handle login request
 router.post("/login", upload.array(), passport.authenticate("local", {

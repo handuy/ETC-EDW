@@ -1,17 +1,22 @@
-<% include partials/header1 %>
+<% include partials/header %>
 
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close" onClick = "removeBox()">&times;</span>
-    <p>Bạn chắc chắn muốn xóa post này ?</p>
-    <form style = "display: inline" action = "/camp/<%= selectedCamp._id %>?_method=DELETE" method = "POST">
-        <button class = "btn btn-sm btn-danger">Yes</button>
-    </form>
-    <a class = "btn btn-sm btn-warning" onClick = "removeBox()">No</a>
-  </div>
-
+<!-- Delete post Modal -->
+<div id="deleteBox" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button style="color:red" type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bạn chắc chắn muốn xóa post này ?</h4>
+            </div>
+            <div class="modal-footer">
+                <form style="display:inline" role = "form" action = "/camp/<%= selectedCamp._id %>?_method=DELETE" method = "POST">
+                    <button class = "btn btn-sm btn-danger">Yes</button>
+                </form>
+                <button class="btn btn-warning" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class = "container">
@@ -25,7 +30,7 @@
             <div class = "text-right">
                 <div>
                     <a class = "btn btn-sm btn-warning" href = "/camp/<%= selectedCamp._id %>/edit">Edit post</a>
-                    <button class = "btn btn-sm btn-danger" id = "deleteBox" onClick = "modalBox()">
+                    <button class = "btn btn-sm btn-danger" data-toggle="modal" data-target = "#deleteBox">
                         Delete post
                     </button>
                 </div>
@@ -58,20 +63,28 @@
                         </div>
                         
                         <div class = "col-sm-1">
-                            <button class = "btn btn-xs btn-danger" onClick = "commentModal()">Delete comment</button>
+                            <button class = "btn btn-xs btn-danger" 
+                            data-toggle="modal" data-target="#deleteComment">Delete comment</button>
                         </div>
                     </div>
                     
-                    <div id="commentModal" class="modal">
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close" onClick = "removeCommentBox()">&times;</span>
-                            <p>Bạn chắc chắn muốn xóa comment này ?</p>
-                            <form style = "display: inline" action = "/camp/<%= selectedCamp._id%>/comment/<%= comment._id %>?_method=DELETE" 
-                            method = "POST">
-                                <button class = "btn btn-sm btn-danger">Yes</button>
-                            </form>
-                            <a class = "btn btn-sm btn-warning" onClick = "removeCommentBox()">No</a>
+                    <!-- Delete comment Modal -->
+                    <div id="deleteComment" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button style="color:red" type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Bạn chắc chắn muốn xóa comment này ?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <form style="display:inline" role = "form" action = "/camp/<%= selectedCamp._id%>/comment/<%= comment._id %>?_method=DELETE" 
+                                    method = "POST">
+                                        <button class = "btn btn-sm btn-danger">Yes</button>
+                                    </form>
+                                    <button class="btn btn-warning" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <% } %>

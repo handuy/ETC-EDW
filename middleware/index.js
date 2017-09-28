@@ -19,7 +19,7 @@ middleObj.checkCampOwnership = function(req,res,next){
         });
     } else {
         req.flash("error", "Please login first");
-        res.redirect("/login");
+        res.redirect("/camp");
     }    
 };
 
@@ -49,7 +49,7 @@ middleObj.isLoggedIn = function(req,res,next){
         return next();
     }
     req.flash("error", "Please login first");
-    res.redirect("/login");    
+    res.redirect("/camp");    
 };
 
 module.exports = middleObj;

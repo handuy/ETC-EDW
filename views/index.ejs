@@ -14,15 +14,20 @@
                 <figure class = "col-xs-6 col-md-4 col-lg-3 thumbnail hvr-bob" >
                     <a href = "/camp/<%= item._id %>">
                         <img src = "<%= item.thumbnailImage %>">
-                        <figcaption> 
-                            <strong><%= item.name %></strong>
-                            <p>
-                                <em>Created by <%= item.author.username %></em>
-                            </p>
+                        <figcaption class = "caption">
+                            <div class = "text">
+                                <h2><%= item.name %></h2>
+                                <p><em>Created by <%= item.author.username %></em></p>
+                            </div>
                         </figcaption>
                     </a>
                 </figure>
             <% }) %>
+            <div class = "col-xs-6 col-md-4 col-lg-3">
+                <a href="/camp/new">
+                    <i class="fa fa-plus-circle fa-5x" aria-hidden="true"></i>
+                </a>
+            </div>
         </section>
     </main>
     
